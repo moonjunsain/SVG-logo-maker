@@ -36,3 +36,31 @@ const questions = [
     }
 
 ]
+
+// function for starting the program by asking questions for the user
+function init(){
+    inq.prompt(questions).then((answers) => {
+        renderLogo(answers);
+    })
+}
+
+// function for rendering a logo
+// accepts answer object returned from the inquirer
+function renderLogo({text, textColor, shape, shapeColor}){
+    // determine which shape the user chose
+    const logo = null
+    switch(shape){
+        case 'Circle':
+            logo = new Circle(shapeColor, textColor, text)
+            break;
+        case 'Square':
+            logo = new Square(shapeColor, textColor, text)
+            break;
+        case 'Triangle':
+            logo = new Triangle(shapeColor, textColor, text)
+    }
+    
+    logo.setColor(shapeColor);
+}
+
+init()
