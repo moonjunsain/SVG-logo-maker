@@ -40,7 +40,15 @@ const questions = [
 // function for starting the program by asking questions for the user
 function init(){
     inq.prompt(questions).then((answers) => {
-        renderLogo(answers);
+       const logo = renderLogo(answers);
+       fs.writeFile('./examples/logo.svg', generateSVG(logo), err => {
+        if(err){
+            console.log('Error occured')
+        }else {
+            console.log("generated")
+        }
+       })
+
     })
 }
 
@@ -58,9 +66,28 @@ function renderLogo({text, textColor, shape, shapeColor}){
             break;
         case 'Triangle':
             logo = new Triangle(shapeColor, textColor, text)
+            break;
     }
-    
+
     logo.setColor(shapeColor);
+
+    // return rendered logo
+    return logo;
+}
+
+// function for generating svg
+function generateSVG(logo){
+    return `
+    <svg version="1.1"
+     width="300" height="200"
+     xmlns="http://www.w3.org/2000/svg">
+
+  ${logo.render()}
+
+  <text x="150" y="125" font-size="60" text-anchor="middle" fill="${logo.textColor}">${logo.text}</text>
+
+</svg>
+`
 }
 
 init()
