@@ -11,7 +11,7 @@ const questions = [
         // checks if input is up to 3 characters
         validate: function(input){
             if(input.length > 3){
-                console.log(`You have entered ${input}, does that look like no more than 3 characters to you?`)
+                console.log(`\tYou have entered ${input}, does that look like no more than 3 characters to you?`)
                 return false;
             }else{
                 return true;
@@ -56,7 +56,7 @@ function init(){
 // accepts answer object returned from the inquirer
 function renderLogo({text, textColor, shape, shapeColor}){
     // determine which shape the user chose
-    const logo = null
+    let logo = null
     switch(shape){
         case 'Circle':
             logo = new Circle(shapeColor, textColor, text)
@@ -84,7 +84,7 @@ function generateSVG(logo){
 
   ${logo.render()}
 
-  <text x="150" y="125" font-size="60" text-anchor="middle" fill="${logo.textColor}">${logo.text}</text>
+  <text x="150" y="120" font-size="60" text-anchor="middle" fill="${logo.textColor}">${logo.text}</text>
 
 </svg>
 `
